@@ -8,11 +8,11 @@ var util = require('util');
 
 function _getDimsMismatchErrMsg(dims1, dims2) {
   return util.format(
-    'Images not the same dimension. First: %sx%s. Second: %sx%s.',
-    dims1[0],
-    dims1[1],
-    dims2[0],
-    dims2[1]
+      'Images not the same dimension. First: %sx%s. Second: %sx%s.',
+      dims1[0],
+      dims1[1],
+      dims2[0],
+      dims2[1]
   );
 }
 
@@ -27,7 +27,7 @@ function _turnPathOrStreamOrBufIntoStream(streamOrBufOrPath, done) {
 
   if (!(streamOrBufOrPath instanceof Stream)) {
     return done(
-      new Error('Argument needs to be a valid read path, stream or buffer.')
+        new Error('Argument needs to be a valid read path, stream or buffer.')
     );
   }
 
@@ -75,7 +75,7 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
               data1[i + 2] !== data2[i + 2] ||
               data1[i + 3] !== data2[i + 3]) {
 
-            diffMetric = 1;
+            diffMetric++;
             // turn the diff pixels redder. No change to alpha
             var addRed = 60;
 
@@ -92,7 +92,8 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
           }
           i += 4;
         }
-        return done(null, writeStream.pack(), diffMetric);
+
+        return done(null, writeStream.pack(), Math.round((diffMetric/data1.length)*10000) / 100);
       });
     });
 
@@ -104,9 +105,9 @@ function outputDiff(streamOrBufOrPath1, streamOrBufOrPath2, destPath, done) {
     if (err) return done(err);
 
     res
-      .pipe(fs.createWriteStream(destPath))
-      .once('error', done)
-      .on('close', done.bind(null, null, diffMetric));
+        .pipe(fs.createWriteStream(destPath))
+        .once('error', done)
+        .on('close', done.bind(null, null, diffMetric));
   });
 }
 

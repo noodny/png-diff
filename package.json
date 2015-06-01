@@ -1,6 +1,6 @@
 {
-  "name": "png-diff",
-  "version": "0.3.0",
+  "name": "png-differ",
+  "version": "0.0.1",
   "description": "Small PNG diff utility, written in pure JS for Node.",
   "main": "index.js",
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chenglou/png-diff"
+    "url": "https://github.com/noodny/png-diff"
   },
   "keywords": [
     "png",
@@ -25,9 +25,9 @@
     "compare",
     "image"
   ],
-  "author": "chenglou",
+  "author": "noodny",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chenglou/png-diff/issues"
+    "url": "https://github.com/noodny/png-diff/issues"
   }
 }

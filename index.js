@@ -70,8 +70,12 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
         var data2 = this.data;
         var dims2 = [this.width, this.height];
 
-        if (data1.length !== data2.length) {
-          return done(new Error(_getDimsMismatchErrMsg(dims1, dims2)));
+        // swap places to use the longer file as a basis
+        var tmp;
+        if (data2.length > data1.length) {
+          tmp = data2;
+          data1 = data2;
+          data2 = tmp;
         }
 
         var i = 0;
@@ -99,7 +103,7 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
               data[i + 2] = Math.max(data2[i + 2] - addRed, 0);
             }
           } else {
-              var desaturated = desaturate(data[i], data[i + 1], data[i + 2]);
+              var desaturated = desaturate(data1[i], data1[i + 1], data1[i + 2]);
               data[i] = desaturated[0];
               data[i + 1] = desaturated[1];
               data[i + 2] = desaturated[2];

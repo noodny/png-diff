@@ -46,6 +46,15 @@ function _turnPathsOrStreamsOrBufsIntoStreams(streamOrBufOrPath1, streamOrBufOrP
   });
 }
 
+function desaturate(r, g, b) {
+  var intensity = 0.3 * r + 0.59 * g + 0.11 * b;
+  var k = 0.8;
+  r = Math.floor(intensity * k + r * (1 - k));
+  g = Math.floor(intensity * k + g * (1 - k));
+  b = Math.floor(intensity * k + b * (1 - k));
+  return [r, g, b];
+}
+
 function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
   _turnPathsOrStreamsOrBufsIntoStreams(streamOrBufOrPath1, streamOrBufOrPath2, function(err, stream1, stream2) {
     if (err) return done(err);
@@ -89,6 +98,11 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
               data[i + 1] = Math.max(data2[i + 1] - addRed, 0);
               data[i + 2] = Math.max(data2[i + 2] - addRed, 0);
             }
+          } else {
+              var desaturated = desaturate(data[i], data[i + 1], data[i + 2]);
+              data[i] = desaturated[0];
+              data[i + 1] = desaturated[0];
+              data[i + 2] = desaturated[0];
           }
           i += 4;
         }

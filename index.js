@@ -73,7 +73,7 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
         // swap places to use the longer file as a basis
         var tmp;
         if (data2.length > data1.length) {
-          tmp = data2;
+          tmp = data1;
           data1 = data2;
           data2 = tmp;
         }

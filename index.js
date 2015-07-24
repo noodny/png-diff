@@ -101,8 +101,8 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
           } else {
               var desaturated = desaturate(data[i], data[i + 1], data[i + 2]);
               data[i] = desaturated[0];
-              data[i + 1] = desaturated[0];
-              data[i + 2] = desaturated[0];
+              data[i + 1] = desaturated[1];
+              data[i + 2] = desaturated[2];
           }
           i += 4;
         }

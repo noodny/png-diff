@@ -88,7 +88,7 @@ function outputDiffStream(streamOrBufOrPath1, streamOrBufOrPath2, done) {
               data1[i + 2] !== data2[i + 2] ||
               data1[i + 3] !== data2[i + 3]) {
 
-            diffMetric++;
+            diffMetric += 4;
             // turn the diff pixels redder. No change to alpha
             var addRed = 60;
 
